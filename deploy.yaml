@@ -1,0 +1,20 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: faiss-vector-db
+spec:
+  predictor:
+    containers:
+      - name: predictor
+        image: <your-docker-image>
+        env:
+          - name: DATABASE_URI
+            value: "s3://mlflow.rack1-equinix/2/d5222ba1d3f54472bc6453fc7f38223a/artifacts/rag-pipeline/rag-database"
+          - name: NVIDIA_API_KEY
+            value: "<your-nvidia-api-key>"
+          - name: EMBEDDINGS_ENDPOINT
+            value: "http://localhost:8000"
+          - name: EMBEDDINGS_MODEL_NAME
+            value: "nvidia/nv-embedqa-e5-v5"
+        ports:
+          - containerPort: 8080
