@@ -28,6 +28,8 @@ def get_artifact_uri_from_experiment(experiment_name):
     Returns:
         str: The artifact URI.
     """
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "file:/tmp/mlruns")
+    mlflow.set_tracking_uri(tracking_uri)
     client = mlflow.tracking.MlflowClient()
     experiment = client.get_experiment_by_name(experiment_name)
     if experiment is None:

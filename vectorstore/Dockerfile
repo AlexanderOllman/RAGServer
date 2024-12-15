@@ -9,6 +9,9 @@ COPY app/ .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Ensure writable permissions for MLflow tracking directory
+RUN mkdir -p /tmp/mlruns && chmod -R 777 /tmp/mlruns
+
 # Expose port
 EXPOSE 8080
 
