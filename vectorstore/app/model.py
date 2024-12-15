@@ -1,4 +1,4 @@
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
 from utils import get_artifact_uri_from_experiment, download_artifact, pdf_into_documents
 import shutil

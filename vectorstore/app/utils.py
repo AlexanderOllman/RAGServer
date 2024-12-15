@@ -2,7 +2,7 @@ import mlflow
 import boto3
 import os
 import shutil
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 
 def pdf_into_documents(file_path):
     """
