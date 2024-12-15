@@ -1,18 +1,18 @@
-import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from model import VectorDatabase
+import os
 
-# Parse environment variables for embeddings configuration
-DATABASE_URI = os.getenv("DATABASE_URI", "")
+# Parse environment variables for embeddings configuration and MLflow experiment
+EXPERIMENT_NAME = os.getenv("MLFLOW_EXPERIMENT_NAME", "")
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY", "")
 EMBEDDINGS_ENDPOINT = os.getenv("EMBEDDINGS_ENDPOINT", "http://localhost:8000")
 MODEL_NAME = os.getenv("EMBEDDINGS_MODEL_NAME", "nvidia/nv-embedqa-e5-v5")
 
-if not DATABASE_URI or not NVIDIA_API_KEY or not EMBEDDINGS_ENDPOINT or not MODEL_NAME:
-    raise RuntimeError("Missing required environment variables: DATABASE_URI, NVIDIA_API_KEY, EMBEDDINGS_ENDPOINT, EMBEDDINGS_MODEL_NAME")
+if not EXPERIMENT_NAME or not NVIDIA_API_KEY or not EMBEDDINGS_ENDPOINT or not MODEL_NAME:
+    raise RuntimeError("Missing required environment variables: MLFLOW_EXPERIMENT_NAME, NVIDIA_API_KEY, EMBEDDINGS_ENDPOINT, EMBEDDINGS_MODEL_NAME")
 
 # Initialize the vector database
-vector_db = VectorDatabase(DATABASE_URI, NVIDIA_API_KEY, EMBEDDINGS_ENDPOINT, MODEL_NAME)
+vector_db = VectorDatabase(EXPERIMENT_NAME, NVIDIA_API_KEY, EMBEDDINGS_ENDPOINT, MODEL_NAME)
 
 app = FastAPI()
 
