@@ -2,5 +2,8 @@ fastapi
 uvicorn[standard]
 langchain
 langchain-nvidia-ai-endpoints
+langchain-community
 boto3
 python-dotenv
+pypdf
+
